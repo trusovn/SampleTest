@@ -8,7 +8,14 @@ namespace NUnitProject1
         IWebDriver driver;
 
         IWebElement SearchField => driver.FindElement(By.CssSelector("input[name='q']"));
-        IWebElement SearchBtn => driver.FindElements(By.CssSelector("input[name='btnK']"))[1];
+        IWebElement SearchBtn
+        {
+            get
+            {
+                var searchButtons = driver.FindElements(By.CssSelector("input[name='btnK']"));
+                return searchButtons[0].Displayed ? searchButtons[0] : searchButtons[1];
+            }
+        }
 
         public GoogleSearchHome()
         {
